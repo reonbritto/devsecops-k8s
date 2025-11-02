@@ -24,8 +24,8 @@ pipeline{
                 script {
                     withDockerRegistry([credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/']) {
                         sh 'printenv'
-                        sh 'docker build -t reonbrito/numeric-app:${GIT_COMMIT} .'
-                        sh 'docker push reonbrito/numeric-app:${GIT_COMMIT}'
+                        sh 'docker build -t reonbritto/numeric-app:${GIT_COMMIT} .'
+                        sh 'docker push reonbritto/numeric-app:${GIT_COMMIT}'
                     }
                 }
             }
