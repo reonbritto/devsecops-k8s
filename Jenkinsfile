@@ -19,12 +19,14 @@ pipeline{
             }
         }
         }
-        stage('Build Docker Image'){
-            steps{
-                withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
-                sh 'printenv'
-                sh 'docker build -t reonbrito/numeric-app:""${GIT_COMMIT}"" .'
-                sh 'docker push reonbrito/numeric-app:""${GIT_COMMIT}"" '
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
+                        sh 'printenv'
+                        sh 'docker build -t reonbrito/numeric-app:${GIT_COMMIT} .'
+                        sh 'docker push reonbrito/numeric-app:${GIT_COMMIT}'
+                    }
                 }
             }
         }
