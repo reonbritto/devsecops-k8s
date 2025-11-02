@@ -18,6 +18,15 @@ pipeline{
                     jacoco execPattern: 'target/jacoco.exec'
             }
         }
+        stage('Build Docker Image'){
+            steps{
+                script{
+                    sh 'printenv'
+                    sh 'docker build -t reonbrito/numeric-app:""${GIT_COMMIT}"" .'
+                    sh 'docker push reonbrito/numeric-app:""${GIT_COMMIT}"" '
+                }
+            }
+        }
     }
 }
 }
