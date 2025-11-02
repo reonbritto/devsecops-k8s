@@ -44,7 +44,7 @@ kubeadm init --pod-network-cidr '10.244.0.0/16' --service-cidr '10.96.0.0/16'  -
 mkdir -p ~/.kube
 cp -i /etc/kubernetes/admin.conf ~/.kube/config
 
-kubectl apply -f "https://github.com/weaveworks/weave/releases/download/v2.9.0/weave-daemonset-k8s.yaml"
+kubectl apply -f "https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s-1.11.yaml"
 kubectl rollout status daemonset weave-net -n kube-system --timeout=90s
 sleep 5
 
@@ -73,13 +73,13 @@ systemctl enable docker
 
 
 echo ".........----------------#################._.-.-Java and MAVEN-.-._.#################----------------........."
-apt install openjdk-17-jdk maven -y
+apt install openjdk-11-jdk maven -y
 java -version
 mvn -v
 
 echo ".........----------------#################._.-.-JENKINS-.-._.#################----------------........."
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-echo 'deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/' | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | gpg --dearmor -o /usr/share/keyrings/jenkins.gpg
+echo 'deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/' > /etc/apt/sources.list.d/jenkins.list
 apt update
 apt install -y jenkins
 systemctl daemon-reload
