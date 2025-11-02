@@ -22,7 +22,7 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                    withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
+                    withDockerRegistry([credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/']) {
                         sh 'printenv'
                         sh 'docker build -t reonbrito/numeric-app:${GIT_COMMIT} .'
                         sh 'docker push reonbrito/numeric-app:${GIT_COMMIT}'
