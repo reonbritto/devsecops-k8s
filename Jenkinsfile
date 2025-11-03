@@ -29,6 +29,15 @@ pipeline{
             }
         }
         }
+
+        stage('SonarQube - SAST') {
+           steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "mvn sonar:sonar -Dsonar.projectKey=numeric-app -Dsonar.projectName='numeric-app'"            
+            }
+           }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
