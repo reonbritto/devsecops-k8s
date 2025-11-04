@@ -35,6 +35,10 @@ pipeline{
             withSonarQubeEnv('sonarqube') {
                 sh "mvn sonar:sonar -Dsonar.projectKey=numeric-app -Dsonar.projectName='numeric-app'"            
             }
+            timeout(time: 2, unit: 'MINUTES') {
+                script {
+                    waitForQualityGate abortPipeline: true
+                }
            }
         }
 
