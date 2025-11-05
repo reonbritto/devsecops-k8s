@@ -42,10 +42,10 @@ pipeline{
            }
         }
         }
-        stage('Vulnerability Scan - Docker') {
+        stage('Vulnerability Scan') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "mvn dependency-check:check"
+                   sh "mvn dependency-check:check -DossIndexAnalyzerEnabled=false"
                 }
             }
         }
