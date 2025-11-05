@@ -48,6 +48,7 @@ pipeline{
                     sh "mvn dependency-check:check"
                 }
             }
+        }
 
         stage('Build Docker Image') {
             steps {
