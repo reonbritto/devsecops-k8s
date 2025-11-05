@@ -44,14 +44,10 @@ pipeline{
         }
         stage('Vulnerability Scan - Docker') {
             steps {
-                sh "mvn org.owasp:dependency-check-maven:8.4.0:check -Danalyzer.ossIndexAnalyzerEnabled=false"
-            } 
-            // post {
-            //     always {
-            //         dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-            //     }
-            // }
-        }
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "mvn dependency-check:check"
+                }
+            }
 
         stage('Build Docker Image') {
             steps {
