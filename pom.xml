@@ -108,7 +108,8 @@
 			    <configuration>
 			     <format>ALL</format>
 			     <failBuildOnCVSS>10</failBuildOnCVSS> <!-- fail the build for CVSS greater than or equal to 9 -->
-			     <ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>
+			     <!-- Disable OSS Index Analyzer to prevent rate limiting issues -->
+			     <ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>
 
 			     <!-- 
 			      use internal mirroring of CVE contents 
