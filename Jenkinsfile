@@ -44,7 +44,7 @@ pipeline{
         }
         stage('Vulnerability Scan - Docker') {
             steps {
-                sh "mvn dependency-check:check -Danalyzer.ossIndexAnalyzerEnabled=false"
+                sh "mvn org.owasp:dependency-check-maven:8.4.0:check -Danalyzer.ossIndexAnalyzerEnabled=false"
             } 
             // post {
             //     always {
